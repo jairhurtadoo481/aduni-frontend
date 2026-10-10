@@ -1,0 +1,16 @@
+{
+  "name": "Intranet ADUNI+",
+  "short_name": "ADUNI+",
+  "description": "Intranet del Colegio ADUNI+: notas, asistencia, tareas, pagos y comunicados.",
+  "start_url": "/intranet",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#12306b",
+  "lang": "es-PE",
+  "icons": [
+    { "src": "/icono-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

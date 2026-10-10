@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: var(--font-inter), sans-serif;
+  font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif;
   background-color: #ffffff;
   color: #111827;
 }
@@ -83,3 +83,53 @@ body {
     opacity: 1;
   }
 }
+@theme {
+  --color-aduni-900: #12306b;
+  --color-aduni-700: #1b4aa0;
+  --color-aduni-600: #2358b8;
+  --color-aduni-100: #e8eefa;
+  --color-oro: #f5b800;
+}
+
+/* ---------- Modo oscuro de la intranet (html.oscuro) ---------- */
+html.oscuro .intranet { color-scheme: dark; background-color: #0b1220; color: #e5e7eb; }
+html.oscuro .intranet .bg-gray-50 { background-color: #0b1220; }
+html.oscuro .intranet .bg-white { background-color: #111a2e; }
+html.oscuro .intranet .bg-gray-100 { background-color: #1a2540; }
+html.oscuro .intranet .bg-aduni-100,
+html.oscuro .intranet .bg-aduni-100\/40,
+html.oscuro .intranet .bg-aduni-100\/50 { background-color: #17264a; }
+html.oscuro .intranet .text-gray-900,
+html.oscuro .intranet .text-gray-800 { color: #f3f4f6; }
+html.oscuro .intranet .text-gray-700,
+html.oscuro .intranet .text-gray-600 { color: #cbd5e1; }
+html.oscuro .intranet .text-gray-500,
+html.oscuro .intranet .text-gray-400 { color: #94a3b8; }
+html.oscuro .intranet .text-aduni-900 { color: #c7d7fb; }
+html.oscuro .intranet .text-aduni-700 { color: #8fb0f5; }
+html.oscuro .intranet .border-gray-100,
+html.oscuro .intranet .border-gray-200,
+html.oscuro .intranet .border-gray-300,
+html.oscuro .intranet .divide-gray-100 > * { border-color: #23304d; }
+html.oscuro .intranet input,
+html.oscuro .intranet select,
+html.oscuro .intranet textarea { background-color: #0f172a; color: #e5e7eb; border-color: #2c3a5c; }
+html.oscuro .intranet .hover\:bg-gray-50:hover { background-color: #1a2540; }
+html.oscuro .intranet .bg-amber-50 { background-color: #3a2e0b; color: #fde68a; }
+html.oscuro .intranet .bg-red-50 { background-color: #3b1214; }
+html.oscuro .intranet .bg-emerald-50 { background-color: #0d2e22; }
+html.oscuro .intranet .shadow-sm { box-shadow: none; }
+
+/* Impresión: solo el contenido */
+@media print {
+  header, footer, aside, .no-imprimir { display: none !important; }
+  .intranet main { padding: 0 !important; }
+}
+
+/* Portada: acercamiento lento de la foto de fondo */
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.kenburns { animation: kenburns 18s ease-out forwards; }
+@media (prefers-reduced-motion: reduce) { .kenburns { animation: none; } }

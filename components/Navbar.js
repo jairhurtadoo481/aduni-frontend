@@ -2,116 +2,101 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import CarritoIndicador from "./CarritoIndicador";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const LINKS = [
+  { href: "/", texto: "Inicio" },
+  { href: "/nosotros", texto: "Nosotros" },
+  { href: "/noticias", texto: "Noticias" },
+  { href: "/becas", texto: "Becas" },
+  { href: "/admision", texto: "Admisión" },
+  { href: "/contacto", texto: "Contacto" },
+];
 
 export default function Navbar() {
-  const router = useRouter();
-  const [busqueda, setBusqueda] = useState("");
-  const [menuAbierto, setMenuAbierto] = useState(false);
+  const pathname = usePathname();
+  const [abierto, setAbierto] = useState(false);
+  const [desplazado, setDesplazado] = useState(false);
 
-  const manejarBuscar = (e) => {
-    e.preventDefault();
-    if (busqueda.trim()) {
-      router.push(`/buscar?q=${encodeURIComponent(busqueda.trim())}`);
-      setMenuAbierto(false);
-    }
-  };
+  useEffect(() => {
+    const revisar = () => setDesplazado(window.scrollY > 40);
+    revisar();
+    window.addEventListener("scroll", revisar, { passive: true });
+    return () => window.removeEventListener("scroll", revisar);
+  }, []);
 
-  const cerrarMenu = () => setMenuAbierto(false);
+  // En el inicio la barra flota transparente sobre la foto; al bajar (o en otras páginas) se vuelve sólida.
+  const transparente = pathname === "/" && !desplazado && !abierto;
+  const activo = (href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    <header className="bg-black/40 backdrop-blur-md border-b border-white/20 text-black sticky top-0 z-50 shadow-sm">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${transparente
+        ? "bg-transparent border-b border-white/10"
+        : "bg-white/90 backdrop-blur-md border-b border-gray-200/70 shadow-[0_8px_30px_rgba(18,48,107,0.08)]"}`}
+    >
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16 gap-4">
-        <Link href="/" className="flex items-center gap-2 text-2xl font-bold tracking-wider text-white hover:text-gray-300 transition">
-          <Image src="/marcelo.png" alt="La Casa de Marcelo" width={36} height={36} className="rounded" />
-          LA CASA DE MARCELO
+        <Link href="/" onClick={() => setAbierto(false)} className={`rounded-xl transition ${transparente ? "bg-white/95 px-2.5 py-1 shadow-lg shadow-black/10" : ""}`}>
+          <Image src="/logo-aduni.png" alt="ADUNI Primaria - Secundaria" width={150} height={42} priority />
         </Link>
 
-        <form onSubmit={manejarBuscar} className="hidden md:block flex-1 max-w-md">
-          <input
-            type="text"
-            placeholder="Buscar zapatillas..."
-            value={busqueda}
-            onChange={(e) => setBusqueda(e.target.value)}
-            className="w-full rounded-lg px-4 py-2 text-sm text-black outline-none border border-white/30 focus:border-white focus:shadow-md transition bg-white/90 backdrop-blur-sm"
-          />
-        </form>
-
-        <nav className="hidden md:flex gap-6 text-sm font-semibold whitespace-nowrap items-center">
-          <Link href="/" className="text-white hover:text-red-400 hover:border-b-2 hover:border-red-400 pb-0.5 transition">
-            Inicio
+        <nav className="hidden lg:flex items-center gap-1 text-sm font-semibold">
+          {LINKS.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`relative px-3 py-2 rounded-full transition ${transparente
+                ? "text-white/90 hover:text-white hover:bg-white/10"
+                : `hover:text-aduni-700 hover:bg-aduni-100/70 ${activo(l.href) ? "text-aduni-700" : "text-gray-700"}`}`}
+            >
+              {l.texto}
+              {activo(l.href) && <span className={`absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full ${transparente ? "bg-oro" : "bg-aduni-700"}`} />}
+            </Link>
+          ))}
+          <span className={`w-px h-6 mx-2 ${transparente ? "bg-white/25" : "bg-gray-200"}`} />
+          <Link
+            href="/intranet/estudiante"
+            className={`px-4 py-2 rounded-full transition ${transparente
+              ? "bg-white/10 text-white ring-1 ring-white/40 backdrop-blur hover:bg-white hover:text-aduni-900"
+              : "bg-aduni-700 text-white hover:bg-aduni-900"}`}
+          >
+            Intranet Estudiante
           </Link>
-          <Link href="/hombre" className="text-white hover:text-red-400 hover:border-b-2 hover:border-red-400 pb-0.5 transition">
-            Hombre
+          <Link href="/intranet/profesor" className="ml-2 bg-oro text-aduni-900 px-4 py-2 rounded-full hover:brightness-105 hover:shadow-lg hover:shadow-oro/30 transition">
+            Intranet Docentes
           </Link>
-          <Link href="/mujer" className="text-white hover:text-red-400 hover:border-b-2 hover:border-red-400 pb-0.5 transition">
-            Mujer
-          </Link>
-          <Link href="/ninios" className="text-white hover:text-red-400 hover:border-b-2 hover:border-red-400 pb-0.5 transition">
-            {"Ni\u00f1os"}
-          </Link>
-          <Link href="/ofertas" className="text-red-400 font-bold hover:text-red-300 hover:border-b-2 hover:border-red-400 pb-0.5 transition">
-            Ofertas
-          </Link>
-          <Link href="/seguimiento" className="text-white hover:text-red-400 hover:border-b-2 hover:border-red-400 pb-0.5 transition">
-            Mi pedido
-          </Link>
-          <CarritoIndicador />
         </nav>
 
-        <div className="flex items-center gap-4 md:hidden">
-          <CarritoIndicador />
-          <button
-            onClick={() => setMenuAbierto(!menuAbierto)}
-            className="flex flex-col gap-1.5 p-2"
-            aria-label="Abrir menu"
-          >
-            <span className="w-6 h-0.5 bg-white"></span>
-            <span className="w-6 h-0.5 bg-white"></span>
-            <span className="w-6 h-0.5 bg-white"></span>
-          </button>
-        </div>
+        <button
+          onClick={() => setAbierto(!abierto)}
+          className={`lg:hidden flex flex-col gap-1.5 p-2 rounded-lg ${transparente ? "bg-white/10 backdrop-blur" : ""}`}
+          aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={abierto}
+        >
+          <span className={`w-6 h-0.5 transition ${transparente ? "bg-white" : "bg-aduni-900"} ${abierto ? "translate-y-2 rotate-45" : ""}`} />
+          <span className={`w-6 h-0.5 transition ${transparente ? "bg-white" : "bg-aduni-900"} ${abierto ? "opacity-0" : ""}`} />
+          <span className={`w-6 h-0.5 transition ${transparente ? "bg-white" : "bg-aduni-900"} ${abierto ? "-translate-y-2 -rotate-45" : ""}`} />
+        </button>
       </div>
 
-      {menuAbierto && (
-        <div className="md:hidden bg-black/40 backdrop-blur-md border-t border-white/20 px-4 py-4">
-          <form onSubmit={manejarBuscar} className="mb-4">
-            <input
-              type="text"
-              placeholder="Buscar zapatillas..."
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-              className="w-full rounded-lg px-4 py-2 text-sm text-black outline-none border border-white/30 focus:border-white focus:shadow-md transition bg-white/90 backdrop-blur-sm"
-            />
-          </form>
-
-          <nav className="flex flex-col gap-3 text-sm font-semibold">
-            <Link href="/" onClick={cerrarMenu} className="text-white hover:text-red-400 transition">
-              Inicio
+      {abierto && (
+        <nav className="lg:hidden border-t border-gray-200 px-4 py-4 flex flex-col gap-1 text-sm font-semibold bg-white">
+          {LINKS.map((l) => (
+            <Link key={l.href} href={l.href} onClick={() => setAbierto(false)}
+              className={`px-3 py-2.5 rounded-lg ${activo(l.href) ? "bg-aduni-100 text-aduni-700" : "text-gray-700"}`}>
+              {l.texto}
             </Link>
-            <Link href="/hombre" onClick={cerrarMenu} className="text-white hover:text-red-400 transition">
-              Hombre
+          ))}
+          <div className="grid grid-cols-2 gap-2 mt-3">
+            <Link href="/intranet/estudiante" onClick={() => setAbierto(false)} className="bg-aduni-700 text-white text-center px-4 py-2.5 rounded-full">
+              Intranet Estudiante
             </Link>
-            <Link href="/mujer" onClick={cerrarMenu} className="text-white hover:text-red-400 transition">
-              Mujer
+            <Link href="/intranet/profesor" onClick={() => setAbierto(false)} className="bg-oro text-aduni-900 text-center px-4 py-2.5 rounded-full">
+              Intranet Docentes
             </Link>
-            <Link href="/ninios" onClick={cerrarMenu} className="text-white hover:text-red-400 transition">
-              {"Ni\u00f1os"}
-            </Link>
-            <Link
-              href="/ofertas"
-              onClick={cerrarMenu}
-              className="text-red-400 font-bold hover:text-red-300 transition"
-            >
-              Ofertas
-            </Link>
-            <Link href="/seguimiento" onClick={cerrarMenu} className="text-white hover:text-red-400 transition">
-              Mi pedido
-            </Link>
-          </nav>
-        </div>
+          </div>
+        </nav>
       )}
     </header>
   );

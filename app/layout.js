@@ -1,26 +1,27 @@
 import "./globals.css";
-import { Anton, Inter } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import RegistrarSW from "../components/RegistrarSW";
 
-const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata = {
-  title: "Zapatillas Marcelo",
-  description: "Tienda de zapatillas Zapatillas Marcelo",
-  verification: {
-    google: "5QJLTvzwUwKr-oZ9vk5653HDgSRTukKxxvpsI2W-x_o",
-  },
+  title: "Colegio ADUNI+ | Andahuaylas",
+  description: "Colegio privado ADUNI+ en San Jerónimo, Andahuaylas: educación primaria y secundaria. Admisión, becas, noticias e intranet.",
+  manifest: "/manifest.webmanifest",
+  icons: { icon: "/icono-192.png", apple: "/apple-touch-icon.png" },
+  appleWebApp: { capable: true, title: "ADUNI+", statusBarStyle: "default" },
 };
+
+export const viewport = { themeColor: "#12306b" };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className={`${anton.variable} ${inter.variable} bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white`}>
+      <body className="bg-white text-gray-900">
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <RegistrarSW />
       </body>
     </html>
   );
