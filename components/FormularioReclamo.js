@@ -19,7 +19,7 @@ const FORMULARIO_INICIAL = {
   esMenor: false,
   apoderadoNombre: "",
   apoderadoDocumento: "",
-  bienTipo: "producto",
+  bienTipo: "servicio",
   bienDescripcion: "",
   monto: "",
   numeroPedido: "",
@@ -106,7 +106,7 @@ function Constancia({ reclamo }) {
             <Dato etiqueta="Tipo" valor={reclamo.bien.tipo === "producto" ? "Producto" : "Servicio"} />
             <Dato etiqueta="Descripción" valor={reclamo.bien.descripcion} />
             <Dato etiqueta="Monto reclamado" valor={reclamo.bien.monto ? `S/ ${reclamo.bien.monto}` : ""} />
-            <Dato etiqueta="N° de pedido" valor={reclamo.bien.numeroPedido} />
+            <Dato etiqueta="Código del estudiante o recibo" valor={reclamo.bien.numeroPedido} />
           </div>
 
           <div className="space-y-1">
@@ -267,14 +267,14 @@ export default function FormularioReclamo() {
                 Servicio
               </label>
             </div>
-            <Campo etiqueta="Descripción (ej. Zapatillas Joma talla 40)">
+            <Campo etiqueta="Descripción (ej. Servicio educativo de 3.° de secundaria, pensión de marzo, atención en secretaría)">
               <input name="bienDescripcion" value={form.bienDescripcion} onChange={cambiar} className={claseInput} maxLength={300} required />
             </Campo>
             <div className="grid sm:grid-cols-2 gap-3">
               <Campo etiqueta="Monto reclamado en S/ (opcional)">
                 <input name="monto" type="number" min="0" step="0.01" value={form.monto} onChange={cambiar} className={claseInput} />
               </Campo>
-              <Campo etiqueta="N° de pedido (opcional)">
+              <Campo etiqueta="Código del estudiante o N.° de recibo (opcional)">
                 <input name="numeroPedido" value={form.numeroPedido} onChange={cambiar} className={claseInput} maxLength={30} />
               </Campo>
             </div>

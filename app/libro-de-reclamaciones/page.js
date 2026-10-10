@@ -1,8 +1,8 @@
 import FormularioReclamo from "../../components/FormularioReclamo";
 
 export const metadata = {
-  title: "Libro de Reclamaciones | La Casa de Marcelo",
-  description: "Registra un reclamo o una queja sobre un producto o la atención de La Casa de Marcelo.",
+  title: "Libro de Reclamaciones | Colegio ADUNI+",
+  description: "Registra un reclamo o una queja sobre el servicio educativo o la atención del Colegio ADUNI+.",
 };
 
 export default function LibroReclamacionesPage() {

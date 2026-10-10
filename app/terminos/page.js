@@ -3,126 +3,101 @@ import PaginaLegal, { Seccion } from "../../components/PaginaLegal";
 import { NEGOCIO } from "../../lib/negocio";
 
 export const metadata = {
-  title: "Términos y Condiciones | La Casa de Marcelo",
-  description: "Condiciones para comprar en La Casa de Marcelo: pedidos, pagos, entrega, cambios y reclamos.",
+  title: "Términos y Condiciones | Colegio ADUNI+",
+  description: "Condiciones de uso de la web y de la intranet del Colegio ADUNI+.",
 };
 
 export default function TerminosPage() {
   return (
     <PaginaLegal titulo="Términos y Condiciones" actualizado={NEGOCIO.versionLegal}>
       <p className="text-sm leading-relaxed text-gray-700 mb-8">
-        Al usar este sitio y hacer un pedido aceptas los siguientes términos. Léelos antes de comprar.
+        Estas condiciones regulan el uso de la web pública y de la intranet de {NEGOCIO.nombreComercial}. Al
+        usarlas, usted las acepta.
       </p>
 
       <Seccion titulo="1. Quiénes somos">
         <p>
-          Este sitio es operado por {NEGOCIO.titular}, titular de {NEGOCIO.nombreComercial} (Zapatillas Marcelo),
-          con RUC {NEGOCIO.ruc} y domicilio en {NEGOCIO.direccion}. Vendemos zapatillas de marcas originales.
+          {NEGOCIO.nombreComercial} es una institución educativa privada de primaria y secundaria, promovida por{" "}
+          {NEGOCIO.titular}, con RUC {NEGOCIO.ruc} y domicilio en {NEGOCIO.direccion}.
         </p>
       </Seccion>
 
-      <Seccion titulo="2. Productos y disponibilidad">
+      <Seccion titulo="2. Información de la web">
+        <p>
+          La información sobre admisión, becas, costos y actividades es referencial. Las condiciones que rigen
+          son las del reglamento interno, la información que el colegio entrega antes de la matrícula y el
+          contrato o compromiso de prestación del servicio educativo firmado con cada familia.
+        </p>
+      </Seccion>
+
+      <Seccion titulo="3. Cuentas de la intranet">
         <ul className="list-disc pl-5 space-y-1">
           <li>
-            Las fotos y descripciones son referenciales. Los colores pueden verse ligeramente distintos según tu
-            pantalla.
+            Cada estudiante (desde el grado que defina el colegio), padre, madre o apoderado, docente y trabajador
+            recibe una cuenta personal e intransferible.
           </li>
           <li>
-            El stock se maneja por talla y está sujeto a disponibilidad. Elige tu talla con la guía de tallas que
-            aparece en cada producto.
+            Usted es responsable de mantener su contraseña en reserva y de cambiar la contraseña temporal en su
+            primer ingreso. El colegio nunca le pedirá su contraseña.
+          </li>
+          <li>
+            Por seguridad, las cuentas se bloquean temporalmente tras varios intentos fallidos, y todos los
+            ingresos y cambios quedan registrados.
+          </li>
+          <li>
+            El colegio puede suspender una cuenta ante un uso indebido o cuando termina la relación educativa o
+            laboral.
           </li>
         </ul>
       </Seccion>
 
-      <Seccion titulo="3. Precios">
+      <Seccion titulo="4. Uso adecuado">
+        <p>No está permitido:</p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>Los precios están expresados en soles (S/) e incluyen el IGV.</li>
-          <li>
-            Los precios de oferta están vigentes mientras se muestren en el sitio y hasta agotar stock. Los
-            productos en oferta requieren el pago completo.
-          </li>
+          <li>Ingresar con la cuenta de otra persona o intentar acceder a información que no le corresponde.</li>
+          <li>Publicar o enviar contenido ofensivo, discriminatorio o que afecte a cualquier miembro de la comunidad.</li>
+          <li>Difundir datos, notas, fotografías o materiales de otros estudiantes o del colegio sin autorización.</li>
+          <li>Intentar dañar, sobrecargar o vulnerar la seguridad del sistema.</li>
         </ul>
+        <p>Estas conductas se atienden según el reglamento interno y la normativa vigente.</p>
       </Seccion>
 
-      <Seccion titulo="4. Cómo hacer un pedido y pagar">
-        <ol className="list-decimal pl-5 space-y-1">
-          <li>Agrega tus productos al carrito y presiona Iniciar compra.</li>
-          <li>Completa tus datos: nombre, celular, ciudad y, si quieres entrega a domicilio, tu dirección.</li>
-          <li>Elige Yape, Plin o BCP, escanea el código QR y paga el monto exacto indicado.</li>
-          <li>Sube la captura o foto de tu comprobante de pago y finaliza la compra.</li>
-        </ol>
+      <Seccion titulo="5. Pagos">
         <p>
-          Tu pedido queda pendiente de confirmación hasta que nuestro personal verifique el pago y se comunique
-          contigo. Si el pago no coincide con el monto, no se puede verificar o el producto ya no está disponible,
-          te avisaremos y coordinaremos contigo la devolución del dinero o una alternativa.
+          Los montos de matrícula y pensiones, sus fechas de vencimiento y las becas se rigen por lo informado
+          por el colegio. Los pagos reportados por la intranet se consideran válidos una vez verificados por
+          tesorería, que emite el recibo y, cuando corresponde, el comprobante electrónico.
         </p>
       </Seccion>
 
-      <Seccion titulo="5. Entrega y recojo">
-        <ul className="list-disc pl-5 space-y-1">
-          <li>
-            <span className="font-semibold">En Andahuaylas:</span> puedes recoger tu pedido en la sucursal que te
-            indiquemos cuando esté listo, o pedir entrega a domicilio.
-          </li>
-          <li>
-            <span className="font-semibold">Fuera de Andahuaylas:</span> coordinamos contigo por teléfono o
-            WhatsApp el envío, los plazos y cualquier costo antes de despachar.
-          </li>
-          <li>
-            Puedes revisar el estado de tu pedido en{" "}
-            <Link href="/seguimiento" className="underline text-blue-700">
-              Seguimiento de Pedidos
-            </Link>{" "}
-            con tu número de pedido y tu celular.
-          </li>
-        </ul>
-      </Seccion>
-
-      <Seccion titulo="6. Comprobantes de pago">
+      <Seccion titulo="6. Disponibilidad">
         <p>
-          Emitimos boleta o factura electrónica conforme a las normas de la SUNAT. Si necesitas factura, indícanos
-          tu RUC y razón social cuando nuestro personal se comunique contigo.
+          Procuramos que la intranet esté disponible en todo momento, pero puede interrumpirse por mantenimiento
+          o por causas ajenas al colegio. Ante cualquier problema puede usar la opción «Ayuda y soporte» de su
+          portal.
         </p>
       </Seccion>
 
-      <Seccion titulo="7. Cambios, devoluciones y reclamos">
+      <Seccion titulo="7. Propiedad intelectual">
         <p>
-          Si tu producto llegó con algún defecto o no corresponde a lo que pediste, comunícate con nosotros lo
-          antes posible indicando tu número de pedido, para evaluar el cambio o la devolución conforme al Código
-          de Protección y Defensa del Consumidor (Ley N.° 29571). Para cambios de talla o de modelo, escríbenos y
-          te indicaremos las condiciones y la disponibilidad.
-        </p>
-        <p>
-          Puedes contactarnos por los medios de la página de{" "}
-          <Link href="/contacto" className="underline text-blue-700">
-            Contacto
-          </Link>
-          .
+          El nombre, el logotipo y los contenidos propios del colegio, incluidos los materiales del aula virtual,
+          no pueden copiarse ni difundirse fuera de la comunidad educativa sin autorización.
         </p>
       </Seccion>
 
-      <Seccion titulo="8. Uso del sitio y propiedad intelectual">
+      <Seccion titulo="8. Reclamos y protección de datos">
         <p>
-          Las marcas y logos que aparecen en el sitio pertenecen a sus respectivos dueños y los usamos solo para
-          identificar los productos que vendemos. El contenido propio del sitio no puede copiarse ni reutilizarse
-          sin nuestra autorización.
+          Puede registrar un reclamo o una queja en nuestro{" "}
+          <Link href="/libro-de-reclamaciones" className="underline text-blue-700">Libro de Reclamaciones</Link>.
+          El tratamiento de datos personales se describe en la{" "}
+          <Link href="/privacidad" className="underline text-blue-700">Política de Privacidad</Link>.
         </p>
       </Seccion>
 
-      <Seccion titulo="9. Tus datos">
+      <Seccion titulo="9. Ley aplicable">
         <p>
-          El tratamiento de tus datos personales se explica en nuestra{" "}
-          <Link href="/privacidad" className="underline text-blue-700">
-            Política de Privacidad
-          </Link>
-          .
-        </p>
-      </Seccion>
-
-      <Seccion titulo="10. Ley aplicable y cambios">
-        <p>
-          Estos términos se rigen por las leyes de la República del Perú. Podemos actualizarlos; la fecha de la
-          última actualización aparece al inicio de la página.
+          Estas condiciones se rigen por las leyes del Perú, incluidas la Ley de los Centros Educativos Privados,
+          el Código de Protección y Defensa del Consumidor y la Ley de Protección de Datos Personales.
         </p>
       </Seccion>
     </PaginaLegal>
