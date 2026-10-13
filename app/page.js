@@ -134,10 +134,10 @@ export default async function Inicio() {
       </section>
 
       {/* ---------- Logros ---------- */}
-      <section className="bg-gradient-to-b from-aduni-100/60 to-white">
+      <section className="bg-gradient-to-b from-aduni-100/60 to-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 py-20 grid gap-12 lg:grid-cols-2 items-center">
           <Revelar className="relative">
-            <div className="absolute -inset-4 rounded-[2rem] bg-oro/30 rotate-2" />
+            <div className="absolute -inset-2 sm:-inset-4 rounded-[2rem] bg-oro/30 rotate-2" />
             <div className="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-square">
               <Image src="/img/logros-fermat-2025.jpg" alt="Estudiantes ganadores del Concurso Nacional Escolar de Comunicación FERMAT 2025" fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
             </div>

@@ -222,7 +222,7 @@ function Detalle({ id, rol, aulas, onCerrar, onCambio }) {
       <div className="flex flex-wrap gap-2 mb-5">
         <SubirArchivo ruta={`/foto?usuario=${u._id}`} accept="image/*" texto="Foto para carné" onSubido={() => { recargar(); onCambio(); }} />
         {rol === "estudiante" && <button onClick={() => abrirPdf(`/admin/usuarios/${u._id}/libreta.pdf`, "libreta.pdf")} className={botonSecundario}>Libreta PDF</button>}
-        {rol === "estudiante" && <button onClick={() => abrirPdf(`/admin/carnes.pdf?estudiante=${u._id}`, "carne.pdf")} className={botonSecundario}>Carné PDF</button>}
+        {["estudiante", "profesor", "administrativo"].includes(rol) && <button onClick={() => abrirPdf(`/admin/carnes.pdf?usuario=${u._id}`, "carne.pdf")} className={botonSecundario}>Carné PDF</button>}
         <button onClick={restablecer} className={botonSecundario}>Restablecer contraseña</button>
         <button onClick={estado} className={botonSecundario}>{u.activo ? "Suspender" : "Reactivar"}</button>
         {bloqueada && <button onClick={() => seguridad("desbloquear")} className={botonSecundario}>Desbloquear cuenta</button>}
